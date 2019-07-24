@@ -5,25 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Black Jack</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
   <body>
     <div id="wrapper">
-        <div id="context">
-
-        </div>
+      <div id="context"></div>
     </div>
-
-
-
-
 
     <script>
       let wrapper = document.querySelector("#wrapper");
-      let context = document.querySelector("#context")
+      let context = document.querySelector("#context");
 
       let cards = [];
       let randomNumber = Math.floor(Math.random() * 52 + 1);
-      let suits = ["spaded", "clubs", "hearts", "diams"];
+      let suits = ["spades", "clubs", "hearts", "diams"];
       let randomCard = [
         "A",
         "2",
@@ -40,9 +35,10 @@
         "K"
       ];
 
-      suits.forEach(s => {
-        randomCard.forEach(c => {
-          context.innerHTML += s + c + " "
+      suits.forEach(suit => {
+        let bgColor = suit === "spades" || suit === "clubs" ? "black" : "red";
+        randomCard.forEach(card => {
+            context.innerHTML += "<span style ='color:"+bgColor+"'>" + "&" + suit + ";" + card + "</span> ";
         });
       });
     </script>
