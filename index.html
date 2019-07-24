@@ -16,8 +16,8 @@
       let wrapper = document.querySelector("#wrapper");
       let context = document.querySelector("#context");
 
-      let cards = [];
-      let randomNumber = Math.floor(Math.random() * 52 + 1);
+      let cardsArr = [];
+      let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
       let randomCard = [
         "A",
@@ -34,13 +34,39 @@
         "Q",
         "K"
       ];
+      console.log(cardsArr)
 
       suits.forEach(suit => {
         let bgColor = suit === "spades" || suit === "clubs" ? "black" : "red";
+        let s = suit[0].toUpperCase()
+
         randomCard.forEach(card => {
-            context.innerHTML += "<span style ='color:"+bgColor+"'>" + "&" + suit + ";" + card + "</span> ";
+            
+            let cardValue = (card.index>9) ? 10 : parseInt(card)+1
+            
+          context.innerHTML +=
+            "<span style ='color:" +
+            bgColor +
+            "'>" +
+            "&" +
+            suit +
+            ";" +
+            card +
+            "</span> ";
+
+            var cardVariants = {
+                
+                suit:s,
+                icon:suit,
+                bgColor:bgColor,
+                cardNum: randomCard[card],
+                cardValue:cardValue
+            }
+            cardsArr.push(cardVariants)
         });
       });
+      
+      context.innerHTML = cardsArr[randomNumber].icon
     </script>
   </body>
 </html>
