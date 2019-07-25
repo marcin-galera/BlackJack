@@ -14,12 +14,12 @@
 
     <script>
       let wrapper = document.querySelector("#wrapper");
-      let context = document.querySelector("#context");
+      let output = document.querySelector("#context");
 
-      let cardsArr = [];
+      let cards = [];
       let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
-      let randomCard = [
+      let numb = [
         "A",
         "2",
         "3",
@@ -34,39 +34,54 @@
         "Q",
         "K"
       ];
-      console.log(cardsArr)
 
-      suits.forEach(suit => {
-        let bgColor = suit === "spades" || suit === "clubs" ? "black" : "red";
-        let s = suit[0].toUpperCase()
 
-        randomCard.forEach(card => {
+      // suits.forEach(s => {
+        
+      //   let suit = s[0].toUpperCase()
+      //   let bgcolor = (s == "S" || s == "C") ? "black" : "red"
+      //     numb.forEach(n => {
             
-            let cardValue = (card.index>9) ? 10 : parseInt(card)+1
-            
-          context.innerHTML +=
-            "<span style ='color:" +
-            bgColor +
-            "'>" +
-            "&" +
-            suit +
-            ";" +
-            card +
-            "</span> ";
-
-            var cardVariants = {
-                
-                suit:s,
-                icon:suit,
-                bgColor:bgColor,
-                cardNum: randomCard[card],
-                cardValue:cardValue
-            }
-            cardsArr.push(cardVariants)
-        });
-      });
+      //       let cardValue = (n == "A" || n == "J" || n == "Q" || n == "K") ? 10 : parseInt(n)
+      //       console.log(cardValue)
+      //       let card = {
+      //         s : s,
+      //         icon: suits[s],
+      //         bgcolor: bgcolor,
+      //         cardnum: numb[n],
+      //         cardvalue: cardValue
+      //       }
+      //       cards.push(card)
+      //       console.log(card)
+      //     })
+      // })
+      // console.log(cards)
       
-      context.innerHTML = cardsArr[randomNumber].icon
+
+      for (s in suits) {
+      var suit = suits[s][0].toUpperCase();
+      var bgcolor = (suit == "S" || suit == "C") ? "black" : "red";
+      for (n in numb) {
+        var cardValue = (n > 9) ? 10 : parseInt(n) + 1
+        var card = {
+          suit: suit,
+          icon: suits[s],
+          bgcolor: bgcolor,
+          cardnum: numb[n],
+          cardvalue: cardValue
+        }
+        cards.push(card);
+      }
+    }
+
+    console.log(cards);
+
+
+    function ranCard() {
+      let randomNum = Math.floor((Math.random() * 52));
+      output.innerHTML += "<span style='color:" + cards[randomNum].bgcolor + "'>&" + cards[randomNum].icon + ";" + cards[randomNum].cardnum + "</span>  ";
+    }
+    ranCard();
     </script>
   </body>
 </html>
