@@ -35,53 +35,34 @@
         "K"
       ];
 
+      suits.forEach(s => {
+        let suit = s[0].toUpperCase();
+        let bgcolor = suit == "S" || suit == "C" ? "black" : "red";
+        numb.forEach(n =>  {
+          let cardValue = n > 9 ? 10 : parseInt(n) + 1;
+          let card = {
+            suit: suit,
+            icon: s,
+            bgcolor: bgcolor,
+            cardnum: n,
+            cardvalue: cardValue
+          };
+          cards.push(card);
+        })
+      });
 
-      // suits.forEach(s => {
-        
-      //   let suit = s[0].toUpperCase()
-      //   let bgcolor = (s == "S" || s == "C") ? "black" : "red"
-      //     numb.forEach(n => {
-            
-      //       let cardValue = (n == "A" || n == "J" || n == "Q" || n == "K") ? 10 : parseInt(n)
-      //       console.log(cardValue)
-      //       let card = {
-      //         s : s,
-      //         icon: suits[s],
-      //         bgcolor: bgcolor,
-      //         cardnum: numb[n],
-      //         cardvalue: cardValue
-      //       }
-      //       cards.push(card)
-      //       console.log(card)
-      //     })
-      // })
-      // console.log(cards)
-      
-
-      for (s in suits) {
-      var suit = suits[s][0].toUpperCase();
-      var bgcolor = (suit == "S" || suit == "C") ? "black" : "red";
-      for (n in numb) {
-        var cardValue = (n > 9) ? 10 : parseInt(n) + 1
-        var card = {
-          suit: suit,
-          icon: suits[s],
-          bgcolor: bgcolor,
-          cardnum: numb[n],
-          cardvalue: cardValue
-        }
-        cards.push(card);
+      function ranCard() {
+        let randomNum = Math.floor(Math.random() * 52);
+        output.innerHTML +=
+          "<span style='color:" +
+          cards[randomNum].bgcolor +
+          "'>&" +
+          cards[randomNum].icon +
+          ";" +
+          cards[randomNum].cardnum +
+          "</span>  ";
       }
-    }
-
-    console.log(cards);
-
-
-    function ranCard() {
-      let randomNum = Math.floor((Math.random() * 52));
-      output.innerHTML += "<span style='color:" + cards[randomNum].bgcolor + "'>&" + cards[randomNum].icon + ";" + cards[randomNum].cardnum + "</span>  ";
-    }
-    ranCard();
+      ranCard();
     </script>
   </body>
 </html>
