@@ -9,7 +9,16 @@
   </head>
   <body>
     <div id="wrapper">
-      <div id="context"></div>
+      <div>
+        <div id="message">Press Start Button</div>
+        <div id="start">
+          <button id="btnStart" type="button" onclick="Start()">Start</button>
+        </div>
+      </div>
+      <div id="context">
+          <div id="dealerHolder"></div>
+          <div id="playerHolder"></div>
+      </div>
     </div>
 
     <script>
@@ -17,6 +26,11 @@
       let output = document.querySelector("#context");
 
       let cards = [];
+      let playerCard = [];
+      let dealerCard = [];
+      let cardCount = 0
+      let dealerHolder = document.querySelector("#dealerHolder")
+      let playerHolder = document.querySelector("#playerHolder")
       let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
       let numb = [
@@ -39,7 +53,8 @@
         let suit = s[0].toUpperCase();
         let bgcolor = suit == "S" || suit == "C" ? "black" : "red";
         numb.forEach(n => {
-          let cardValue =  n === "A" ? 1 : n == "J" || n == "Q" || n == "K" ? 10 : parseInt(n)
+          let cardValue =
+            n === "A" ? 1 : n == "J" || n == "Q" || n == "K" ? 10 : parseInt(n);
 
           let card = {
             suit: suit,
@@ -49,23 +64,50 @@
             cardvalue: cardValue
           };
           cards.push(card);
-
         });
       });
 
-      function ranCard() {
-        let randomNum = Math.floor(Math.random() * 52);
+      function Start() {
+        shuffleDeck(cards);
+        dealNew();
+        outputCard();
+      }
+
+      function dealNew() {
+        playerCard = [];
+        dealerCard = []
+        dealerHolder.innerHTML = ""
+        playerHolder.innerHTML = ""
+        for(x=0;x<2;x++) {
+          dealerCard.push(cards[cardCount])
+          cardCount++
+          playerCard.push(cards[cardCount])
+          cardCount++
+        }
+        console.log(dealerCard)
+        console.log(playerCard)
+      }
+
+      function shuffleDeck(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          let temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+
+      function outputCard() {
         output.innerHTML +=
           "<span style='color:" +
-          cards[randomNum].bgcolor +
-          "'>&" +
-          cards[randomNum].icon +
-          ";" +
-          cards[randomNum].cardnum +
-          "</span>  ";
+          cards[cardCount].bgcolor +
+          "'>" +
+          cards[cardCount].cardnum +
+          "&" +
+          cards[cardCount].icon +
+          ";</span>  ";
       }
-      ranCard();
-      console.log(cards)
     </script>
   </body>
 </html>
