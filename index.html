@@ -16,8 +16,10 @@
         </div>
       </div>
       <div id="context">
-          <div id="dealerHolder"></div>
-          <div id="playerHolder"></div>
+        Dealer Hand:
+        <div id="dealerHolder"></div>
+        Player Hand:
+        <div id="playerHolder"></div>
       </div>
     </div>
 
@@ -28,9 +30,9 @@
       let cards = [];
       let playerCard = [];
       let dealerCard = [];
-      let cardCount = 0
-      let dealerHolder = document.querySelector("#dealerHolder")
-      let playerHolder = document.querySelector("#playerHolder")
+      let cardCount = 0;
+      let dealerHolder = document.querySelector("#dealerHolder");
+      let playerHolder = document.querySelector("#playerHolder");
       let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
       let numb = [
@@ -70,22 +72,36 @@
       function Start() {
         shuffleDeck(cards);
         dealNew();
-        outputCard();
       }
 
       function dealNew() {
         playerCard = [];
-        dealerCard = []
-        dealerHolder.innerHTML = ""
-        playerHolder.innerHTML = ""
-        for(x=0;x<2;x++) {
-          dealerCard.push(cards[cardCount])
-          cardCount++
-          playerCard.push(cards[cardCount])
-          cardCount++
+        dealerCard = [];
+        dealerHolder.innerHTML = "";
+        playerHolder.innerHTML = "";
+        for (x = 0; x < 2; x++) {
+          dealerCard.push(cards[cardCount]);
+          dealerHolder.innerHTML += cardOutput(cardCount, x);
+          cardCount++;
+          playerCard.push(cards[cardCount]);
+          playerHolder.innerHTML += cardOutput(cardCount, x);
+          cardCount++;
         }
-        console.log(dealerCard)
-        console.log(playerCard)
+      }
+
+      function cardOutput(num, x) {
+        let hpos = x > 0 ? x * 60 + 110 : 100;
+        return (
+          '<div class="icard ' +
+          cards[num].icon +
+          '" style="left:' +
+          hpos +
+          'px;"><div class="top-card suit">' +
+          cards[num].cardnum +
+          '<br></div><div class="content-card suit"></div><div class="bottom-card suit">' +
+          cards[num].cardnum +
+          "<br></div></div>"
+        );
       }
 
       function shuffleDeck(array) {
@@ -96,17 +112,6 @@
           array[j] = temp;
         }
         return array;
-      }
-
-      function outputCard() {
-        output.innerHTML +=
-          "<span style='color:" +
-          cards[cardCount].bgcolor +
-          "'>" +
-          cards[cardCount].cardnum +
-          "&" +
-          cards[cardCount].icon +
-          ";</span>  ";
       }
     </script>
   </body>
