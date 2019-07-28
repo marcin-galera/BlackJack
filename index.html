@@ -10,16 +10,59 @@
   <body>
     <div id="wrapper">
       <div>
-        <div id="message">Press Start Button</div>
+        <h1>BlackJack Game</h1>
+        <h4>&#9733; Zdobądź 21 oczek, bądź więcej nie krupier! &#9733;</h4>
+        <div class="money">Stan konta: <span id="pln">100</span> PLN</div>
+        <div>
+          Wielkość zakładu w złotówkach:
+          <input type="number" id="mybet" value="0" min="1" max="200" />
+          <button id="maxBet" type="button" onclick="maxbet()" class="btn">
+            Max Bet
+          </button>
+        </div>
+      </div>
+      <div>
+        <div id="message">Wciśnij start, aby rozpocząć</div>
         <div id="start">
-          <button id="btnStart" type="button" onclick="Start()">Start</button>
+          <button class ="btn" id="btnStart" type="button" onclick="Start()">Start</button>
         </div>
       </div>
       <div id="context">
-        Dealer Hand:
+        Karty krupiera: <span id="dValue"></span>
         <div id="dealerHolder"></div>
-        Player Hand:
+        Karty gracza: <span id="dValue"></span>
         <div id="playerHolder"></div>
+        <div id="myActions">
+          <button
+            id="btnHold"
+            tpye="button"
+            onclick="cardAction('hold')"
+            class="btn"
+          >
+            Stój
+          </button>
+          <button
+            id="btnHit"
+            tpye="button"
+            onclick="cardAction('hit')"
+            class="btn"
+          >
+            Dobierz
+          </button>
+          <button
+            id="btnDouble"
+            tpye="button"
+            onclick="cardAction('double')"
+            class="btn"
+          >
+            Podwój
+          </button>
+        </div>
+        <div>
+          <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
+            Nowa gra
+          </button>
+        </div>
       </div>
     </div>
 
@@ -71,7 +114,7 @@
 
       function Start() {
         shuffleDeck(cards);
-        dealNew();
+        
       }
 
       function dealNew() {
@@ -82,6 +125,12 @@
         for (x = 0; x < 2; x++) {
           dealerCard.push(cards[cardCount]);
           dealerHolder.innerHTML += cardOutput(cardCount, x);
+
+          x === 0
+            ? (dealerHolder.innerHTML +=
+                '<div id="cover" style="left:100px"></div>')
+            : null;
+
           cardCount++;
           playerCard.push(cards[cardCount]);
           playerHolder.innerHTML += cardOutput(cardCount, x);
@@ -90,6 +139,7 @@
       }
 
       function cardOutput(num, x) {
+        console.log(num, x)
         let hpos = x > 0 ? x * 60 + 110 : 100;
         return (
           '<div class="icard ' +
