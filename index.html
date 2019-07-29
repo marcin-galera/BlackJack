@@ -15,7 +15,7 @@
         <div class="money">Stan konta: <span id="pln">100</span> PLN</div>
         <div>
           Wielkość zakładu w złotówkach:
-          <input type="number" id="mybet" value="0" min="1" max="200" />
+          <input type="number" id="mybet" value="5" min="1" max="200" />
           <button id="maxBet" type="button" onclick="maxbet()" class="btn">
             Max Bet
           </button>
@@ -94,6 +94,7 @@
         "Q",
         "K"
       ];
+      let message = document.getElementById("message")
 
       suits.forEach(s => {
         let suit = s[0].toUpperCase();
@@ -115,7 +116,9 @@
 
       function Start() {
         shuffleDeck(cards);
-        
+        dealNew()
+        document.getElementById("start").style.display = 'none'
+        document.getElementById("pln").innetHTML = pln
       }
 
       function dealNew() {
@@ -123,6 +126,20 @@
         dealerCard = [];
         dealerHolder.innerHTML = "";
         playerHolder.innerHTML = "";
+
+         let betValue = document.getElementById("mybet").value
+         pln = pln - betValue
+         document.getElementById("pln").innetHTML = pln
+         document.getElementById('myActions').style.display = "block"
+         message.innerHTML = "Get up to 21 and bet the dealer<br>Current bet is $"+betValue
+         document.getElementById("mybet").disable = true
+         document.getElementById("maxBet").disable = true
+         deal();
+
+      }
+
+       function deal() {
+console.log(cards)
         for (x = 0; x < 2; x++) {
           dealerCard.push(cards[cardCount]);
           dealerHolder.innerHTML += cardOutput(cardCount, x);
@@ -137,7 +154,7 @@
           playerHolder.innerHTML += cardOutput(cardCount, x);
           cardCount++;
         }
-      }
+       }
 
       function cardOutput(num, x) {
         console.log(num, x)
