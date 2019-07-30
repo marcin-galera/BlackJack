@@ -22,20 +22,22 @@
         </div>
       </div>
       <div>
-          <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
-            Nowa gra
-          </button>
-        </div>
+        <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
+          Nowa gra
+        </button>
+      </div>
       <div>
         <div id="message">Wciśnij start, aby rozpocząć</div>
         <div id="start">
-          <button class ="btn" id="btnStart" type="button" onclick="Start()">Start</button>
+          <button class="btn" id="btnStart" type="button" onclick="Start()">
+            Start
+          </button>
         </div>
       </div>
       <div id="context">
         Karty krupiera: <span id="dValue"></span>
         <div id="dealerHolder"></div>
-        Karty gracza: <span id="dValue"></span>
+        Karty gracza: <span id="pValue"></span>
         <div id="playerHolder"></div>
         <div id="myActions">
           <button
@@ -63,7 +65,6 @@
             Podwój
           </button>
         </div>
-        
       </div>
     </div>
 
@@ -77,6 +78,8 @@
       let cardCount = 0;
       let dealerHolder = document.querySelector("#dealerHolder");
       let playerHolder = document.querySelector("#playerHolder");
+      let pValue = document.querySelector("#pValue")
+      let dValue = document.querySelector("#dValue")
       let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
       let numb = [
@@ -94,7 +97,7 @@
         "Q",
         "K"
       ];
-      let message = document.getElementById("message")
+      let message = document.getElementById("message");
 
       suits.forEach(s => {
         let suit = s[0].toUpperCase();
@@ -116,9 +119,9 @@
 
       function Start() {
         shuffleDeck(cards);
-        dealNew()
-        document.getElementById("start").style.display = 'none'
-        document.getElementById("pln").innetHTML = pln
+        dealNew();
+        document.getElementById("start").style.display = "none";
+        document.getElementById("pln").innetHTML = pln;
       }
 
       function dealNew() {
@@ -127,26 +130,25 @@
         dealerHolder.innerHTML = "";
         playerHolder.innerHTML = "";
 
-         let betValue = document.getElementById("mybet").value
-         pln = pln - betValue
-         document.getElementById("pln").innetHTML = pln
-         document.getElementById('myActions').style.display = "block"
-         message.innerHTML = "Get up to 21 and bet the dealer<br>Current bet is $"+betValue
-         document.getElementById("mybet").disable = true
-         document.getElementById("maxBet").disable = true
-         deal();
-
+        let betValue = document.getElementById("mybet").value;
+        pln = pln - betValue;
+        document.getElementById("pln").innetHTML = pln;
+        document.getElementById("myActions").style.display = "block";
+        message.innerHTML =
+          "Get up to 21 and bet the dealer<br>Current bet is $" + betValue;
+        document.getElementById("mybet").disable = true;
+        document.getElementById("maxBet").disable = true;
+        deal();
       }
 
-       function deal() {
-console.log(cards)
+      function deal() {
         for (x = 0; x < 2; x++) {
           dealerCard.push(cards[cardCount]);
           dealerHolder.innerHTML += cardOutput(cardCount, x);
 
           x === 0
             ? (dealerHolder.innerHTML +=
-                '<div id="cover" style="left:100px"></div>')
+                '<div id="cover" style="left:43%"></div>')
             : null;
 
           cardCount++;
@@ -154,22 +156,65 @@ console.log(cards)
           playerHolder.innerHTML += cardOutput(cardCount, x);
           cardCount++;
         }
-       }
+      }
 
       function cardOutput(num, x) {
-        console.log(num, x)
-        let hpos = x > 0 ? x * 60 + 110 : 100;
+        let hpos = x > 0 ? x * 5 + 42 : 43;
         return (
           '<div class="icard ' +
           cards[num].icon +
           '" style="left:' +
           hpos +
-          'px;"><div class="top-card suit">' +
+          '%;"><div class="top-card suit">' +
           cards[num].cardnum +
           '<br></div><div class="content-card suit"></div><div class="bottom-card suit">' +
           cards[num].cardnum +
           "<br></div></div>"
         );
+      }
+
+      function cardAction(a) {
+        console.log(a);
+        switch (a) {
+          case "hit":
+            playuCard();
+            break;
+          case "hold":
+            playEnd();
+            break;
+          case "double":
+            playuCard();
+            playEnd();
+            break;
+          default:
+            console.log("done");
+            break;
+        }
+      }
+
+      function playuCard() {
+          playerCard.push(cards[cardCount]);
+          playerHolder.innerHTML += cardOutput(cardCount, (playerCard.length - 1));
+          cardCount++;
+          let rValu = checkTotal(playerCard)
+          pValue.innerHTML = rValu;
+
+      }
+
+      function checkTotal(arr) {
+        let rValue = 0
+        let aceAdjust = false;
+        for( let i in arr ) {
+          if(arr[i].cardnum == "A" && !aceAdjust) {
+            aceAdjust=true
+            rValue = rValue + 10
+          }
+          rValue=rValue+arr[i].cardvalue
+        }
+        if(aceAdjust && rValue > 21 ) {
+          rValue=rValue-10
+        }
+        return rValue
       }
 
       function shuffleDeck(array) {
