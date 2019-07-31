@@ -17,6 +17,11 @@ body {
   text-align: center;
 }
 
+.NewGame__Wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 #dealerHolder,
 #playerHolder {
   height: 200px;
