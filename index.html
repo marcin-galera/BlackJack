@@ -142,8 +142,8 @@
         document.getElementById("myActions").style.display = "block";
         message.innerHTML =
           "Get up to 21 and bet the dealer<br>Current bet is $" + betValue;
-        document.getElementById("mybet").disable = true;
-        document.getElementById("maxBet").disable = true;
+        document.getElementById("mybet").disabled = true;
+        document.getElementById("maxBet").disabled = true;
         deal();
         document.querySelector("#btnDeal").style.display = "none";
       }
@@ -173,6 +173,7 @@
           reDeal();
         }
         pValue.innerHTML = checkTotal(playerCard);
+        dValue.innerHTML = "";
       }
 
       function cardOutput(num, x) {
@@ -278,6 +279,8 @@
 
         pValue.innerHTML = playerValue;
         dollarValue.innerHTML = myDollars;
+        document.getElementById("mybet").disabled = false;
+        document.getElementById("maxBet").disabled = false;
       }
 
       function checkTotal(arr) {
