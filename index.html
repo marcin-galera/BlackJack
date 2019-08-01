@@ -152,17 +152,16 @@
           document.getElementById("btnRestart").style.display = "block";
           document.getElementById("btnDeal").style.display = "none";
           document.getElementById("myActions").style.display = "none";
-          message.innerHTML = "Przegrałeś :(. Zacznij od nowa!";
+          message.innerHTML = '<span style="color:green;">Przegrałeś!  Zacznij od nowa!</span>'
           myDollars = 100;
           dollarValue.innerHTML = 100
           document.getElementById("mybet").value = 5;
-        
+        }
         document.getElementById("btnRestart").style.display = "none";
         document.getElementById("btnDeal").style.display = "none";
         document.getElementById("myActions").style.display = "block";
-        document.getElementById("mybet").disabled = false;
-        document.getElementById("maxBet").disabled = false;
-        }
+        document.getElementById("mybet").disabled = true;
+        document.getElementById("maxBet").disabled = true;
       }
 
       function dealNew() {
