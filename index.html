@@ -86,11 +86,11 @@
       let randomNumber = Math.floor(Math.random() * 52);
       let suits = ["spades", "clubs", "hearts", "diams"];
       let message = document.getElementById("message");
-      let dollarValue = document.getElementById("pln")
+      let dollarValue = document.getElementById("pln");
       let numb = [
         "A",
         "2",
-        "3", 
+        "3",
         "4",
         "5",
         "6",
@@ -128,24 +128,16 @@
         dollarValue.innerHTML = myDollars;
       }
 
-      // W trakcie dodawania
-
-      // function resetCard() {
-      //   return cardCount = 0
-      // }
-
       function dealNew() {
+        cards = cards;
         playerCard = [];
         dealerCard = [];
         dealerHolder.innerHTML = "";
         playerHolder.innerHTML = "";
-        
 
         let betValue = document.getElementById("mybet").value;
         myDollars = myDollars - betValue;
         dollarValue.innerHTML = myDollars;
-
-        
 
         document.getElementById("myActions").style.display = "block";
         message.innerHTML =
@@ -153,7 +145,16 @@
         document.getElementById("mybet").disable = true;
         document.getElementById("maxBet").disable = true;
         deal();
+        document.querySelector("#btnDeal").style.display = "none";
+      }
 
+      function reDeal() {
+        cardCount++;
+        if (cardCount > 45) {
+          shuffleDeck(cards);
+          cardCount = 0;
+          message.innerHTML = "Nowa talia kart!";
+        }
       }
 
       function deal() {
@@ -166,18 +167,17 @@
                 '<div id="cover" style="left:43%"></div>')
             : null;
 
-          cardCount++;
+          reDeal();
           playerCard.push(cards[cardCount]);
           playerHolder.innerHTML += cardOutput(cardCount, x);
-          cardCount++;
+          reDeal();
         }
         pValue.innerHTML = checkTotal(playerCard);
       }
 
       function cardOutput(num, x) {
         let hpos = x > 0 ? x * 5 + 42 : 43;
-        console.log(x)
-        
+
         return (
           '<div class="icard ' +
           cards[cardCount].icon +
@@ -198,10 +198,12 @@
             break;
           case "hold":
             playEnd();
+
             break;
           case "double":
             playuCard();
             playEnd();
+
             break;
           default:
             break;
@@ -211,7 +213,7 @@
       function playuCard() {
         playerCard.push(cards[cardCount]);
         playerHolder.innerHTML += cardOutput(cardCount, playerCard.length - 1);
-        cardCount++;
+        reDeal();
         let rValu = checkTotal(playerCard);
         pValue.innerHTML = rValu;
 
@@ -240,7 +242,7 @@
             cardCount,
             dealerCard.length - 1
           );
-          cardCount++;
+          reDeal();
           dealerValue = checkTotal(dealerCard);
           dValue.innerHTML = dealerValue;
         }
@@ -258,21 +260,24 @@
           (playerValue < 22 && playerValue > dealerValue) ||
           (dealerValue > 21 && playerValue < 22)
         ) {
-          message.innerHTML += '<span style="color:green;">Wygrałeś! '+betValue+' pln</span>'
-        myDollars = myDollars + (betValue * 2)
-        } else if ( playerValue > 21 ) {
-          message.innerHTML += '<span style="color:red;">Przegrałeś! '+betValue+' pln</span>'
-          myDollars = myDollars - (betValue)
-        } else if ( playerValue === dealerValue ) {
-          message.innerHTML += '<span style="color:blue;">Remis! '+betValue+' pln</span>'
-        myDollars = myDollars + (betValue)
+          message.innerHTML +=
+            '<span style="color:green;">Wygrałeś! ' + betValue + " pln</span>";
+          myDollars = myDollars + betValue * 2;
+        } else if (playerValue > 21) {
+          message.innerHTML +=
+            '<span style="color:red;">Przegrałeś! ' + betValue + " pln</span>";
+          myDollars = myDollars - betValue;
+        } else if (playerValue === dealerValue) {
+          message.innerHTML +=
+            '<span style="color:blue;">Remis! ' + betValue + " pln</span>";
+          myDollars = myDollars + betValue;
         } else {
-          message.innerHTML += '<span style="color:red;">Przegrałeś! '+betValue+' pln</span>'
+          message.innerHTML +=
+            '<span style="color:red;">Przegrałeś! ' + betValue + " pln</span>";
         }
 
         pValue.innerHTML = playerValue;
-        dollarValue.innerHTML = myDollars
-        
+        dollarValue.innerHTML = myDollars;
       }
 
       function checkTotal(arr) {
