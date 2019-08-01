@@ -11,7 +11,7 @@
     <div id="wrapper">
       <div>
         <h1>BlackJack Game</h1>
-        <h4>&#9733; Zdobądź 21 oczek, bądź więcej nie krupier! &#9733;</h4>
+        <h4>&#9733; Zdobądź 21 oczek, bądź więcej niż krupier! &#9733;</h4>
         <div class="money">Stan konta: <span id="pln">100</span> PLN</div>
         <div>
           Wielkość zakładu w złotówkach:
@@ -62,8 +62,10 @@
           </button>
         </div>
         <div class="NewGame__Wrapper">
+          
           <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
-            Nowa gra
+            Nowe rozdanie!
+            <div style="font-size: 13px">Przed kliknięciem wybierz kwotę zakładu!</div>
           </button>
           <button
             id="btnRestart"
@@ -152,7 +154,7 @@
           document.getElementById("btnRestart").style.display = "block";
           document.getElementById("btnDeal").style.display = "none";
           document.getElementById("myActions").style.display = "none";
-          message.innerHTML = '<span style="color:green;">Przegrałeś!  Zacznij od nowa!</span>'
+          message.innerHTML = '<span  style=color:red;font-size:50px>Przegrałeś!  Zacznij od nowa!</span>'
           myDollars = 100;
           dollarValue.innerHTML = 100
           document.getElementById("mybet").value = 5;
@@ -177,7 +179,7 @@
 
         document.getElementById("myActions").style.display = "block";
         message.innerHTML =
-          "Get up to 21 and bet the dealer<br>Current bet is $" + betValue;
+          "Get up to 21 and bet the dealer<br>Aktualny zakład o " + betValue + " pln";
         document.getElementById("mybet").disabled = true;
         document.getElementById("maxBet").disabled = true;
         deal();
