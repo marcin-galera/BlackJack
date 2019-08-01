@@ -65,7 +65,12 @@
           <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
             Nowa gra
           </button>
-          <button id="btnRestart" type="button" onclick="restartGame()" class="btn">
+          <button
+            id="btnRestart"
+            type="button"
+            onclick="restartGame()"
+            class="btn"
+          >
             Zacznij od nowa
           </button>
         </div>
@@ -107,11 +112,15 @@
         "K"
       ];
 
-      document.getElementById('mybet').onchange = function() {
-        if(this.value < 0) { this.value = 0}
-        if(this.value > myDollars) { this.value = myDollars}
-        message.innerHTML = "Zakład o " + this.value + " pln"
-      }
+      document.getElementById("mybet").onchange = function() {
+        if (this.value < 0) {
+          this.value = 0;
+        }
+        if (this.value > myDollars) {
+          this.value = myDollars;
+        }
+        message.innerHTML = "Zakład o " + this.value + " pln";
+      };
 
       suits.forEach(s => {
         let suit = s[0].toUpperCase();
@@ -139,18 +148,24 @@
       }
 
       function restartGame() {
-        if(myDollars < 0 ) {
+        if (myDollars < 0) {
           document.getElementById("btnRestart").style.display = "block";
+          document.getElementById("btnDeal").style.display = "none";
           document.getElementById("myActions").style.display = "none";
-          message.innerHTML = "Przegrałeś :(. Zacznij od nowa!"
-          myDollars = 100
-
-        }
+          message.innerHTML = "Przegrałeś :(. Zacznij od nowa!";
+          myDollars = 100;
+          dollarValue.innerHTML = 100
+          document.getElementById("mybet").value = 5;
         
+        document.getElementById("btnRestart").style.display = "none";
+        document.getElementById("btnDeal").style.display = "none";
+        document.getElementById("myActions").style.display = "block";
+        document.getElementById("mybet").disabled = false;
+        document.getElementById("maxBet").disabled = false;
+        }
       }
 
       function dealNew() {
-        
         cards = cards;
         playerCard = [];
         dealerCard = [];
@@ -168,6 +183,8 @@
         document.getElementById("maxBet").disabled = true;
         deal();
         document.querySelector("#btnDeal").style.display = "none";
+
+        restartGame()
       }
 
       function reDeal() {
@@ -177,7 +194,6 @@
           cardCount = 0;
           message.innerHTML = "Nowa talia kart!";
         }
-        restartGame()
       }
 
       function deal() {
@@ -216,8 +232,8 @@
       }
 
       function maxbet() {
-        mybet.value = myDollars
-        message.innerHTML = "Postawiłeś "+myDollars+" pln"
+        mybet.value = myDollars;
+        message.innerHTML = "Postawiłeś " + myDollars + " pln";
       }
 
       function cardAction(a) {
@@ -230,16 +246,16 @@
 
             break;
           case "double":
-          let betValue = parseInt(document.getElementById('mybet').value)
-          if((myDollars - betValue) < 0 ) {
-            betValue = betValue + myDollars;
-            myDollars = 0
-          } else {
-            myDollars = myDollars - betValue
-            betValue = betValue * 2
-          }
-          document.getElementById('pln').innerHTML = myDollars
-          document.getElementById('mybet').value = betValue
+            let betValue = parseInt(document.getElementById("mybet").value);
+            if (myDollars - betValue < 0) {
+              betValue = betValue + myDollars;
+              myDollars = 0;
+            } else {
+              myDollars = myDollars - betValue;
+              betValue = betValue * 2;
+            }
+            document.getElementById("pln").innerHTML = myDollars;
+            document.getElementById("mybet").value = betValue;
             playuCard();
             playEnd();
 
@@ -319,6 +335,7 @@
         dollarValue.innerHTML = myDollars;
         document.getElementById("mybet").disabled = false;
         document.getElementById("maxBet").disabled = false;
+        restartGame;
       }
 
       function checkTotal(arr) {
