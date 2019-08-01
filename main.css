@@ -127,10 +127,17 @@ body {
 }
 
 #maxBet {
+  font-size: 18px;
+  padding: 4px 6px 4px 6px;
   background-color: rgb(255, 0, 0);
 }
 #btnStart {
   background-color: rgb(0, 0, 0);
+}
+
+#btnDeal {
+  background-color: purple;
+  font-size: 25px
 }
 
 .total {
