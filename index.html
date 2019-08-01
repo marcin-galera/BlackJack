@@ -65,6 +65,9 @@
           <button id="btnDeal" type="button" onclick="dealNew()" class="btn">
             Nowa gra
           </button>
+          <button id="btnRestart" type="button" onclick="restartGame()" class="btn">
+            Zacznij od nowa
+          </button>
         </div>
       </div>
     </div>
@@ -87,6 +90,7 @@
       let suits = ["spades", "clubs", "hearts", "diams"];
       let message = document.getElementById("message");
       let dollarValue = document.getElementById("pln");
+      document.getElementById("btnRestart").style.display = "none";
       let numb = [
         "A",
         "2",
@@ -134,7 +138,19 @@
         dollarValue.innerHTML = myDollars;
       }
 
+      function restartGame() {
+        if(myDollars < 0 ) {
+          document.getElementById("btnRestart").style.display = "block";
+          document.getElementById("myActions").style.display = "none";
+          message.innerHTML = "Przegrałeś :(. Zacznij od nowa!"
+          myDollars = 100
+
+        }
+        
+      }
+
       function dealNew() {
+        
         cards = cards;
         playerCard = [];
         dealerCard = [];
@@ -161,6 +177,7 @@
           cardCount = 0;
           message.innerHTML = "Nowa talia kart!";
         }
+        restartGame()
       }
 
       function deal() {
