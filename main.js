@@ -16,7 +16,7 @@ let suits = ["spades", "clubs", "hearts", "diams"];
 let message = document.getElementById("message");
 let dollarValue = document.getElementById("pln");
 document.getElementById("btnRestart").style.display = "none";
-let numb = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+let numb = ["A", "A", "A", "A", "A", "A", "A", "8", "9", "10", "J", "Q", "K"];
 
 document.getElementById("mybet").onchange = function() {
   if (this.value < 0) {
@@ -63,13 +63,7 @@ function restartGame() {
     myDollars = 100;
     dollarValue.innerHTML = 100;
     document.getElementById("mybet").value = 5;
-  }
-  document.getElementById("btnRestart").style.display = "none";
-  document.getElementById("btnDeal").style.display = "none";
-  document.getElementById("myActions").style.display = "block";
-  document.getElementById("mybet").disabled = true;
-  document.getElementById("maxBet").disabled = true;
-}
+  } }
 
 function dealNew() {
   cards = cards;
@@ -82,13 +76,17 @@ function dealNew() {
   myDollars = myDollars - betValue;
   dollarValue.innerHTML = myDollars;
 
+  /////////////////////////////
+  document.querySelector("#btnDeal").style.display = "block";
   document.getElementById("myActions").style.display = "block";
+
+
   message.innerHTML =
     "Get up to 21 and bet the dealer<br>Aktualny zakład o " + betValue + " pln";
   document.getElementById("mybet").disabled = true;
   document.getElementById("maxBet").disabled = true;
   deal();
-  document.querySelector("#btnDeal").style.display = "none";
+
 
   restartGame();
 }
@@ -244,7 +242,6 @@ function playEnd() {
   dollarValue.innerHTML = myDollars;
   document.getElementById("mybet").disabled = false;
   document.getElementById("maxBet").disabled = false;
-  restartGame;
 }
 
 function checkTotal(arr) {
