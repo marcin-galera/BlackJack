@@ -78,6 +78,7 @@ function dealNew() {
   dollarValue.innerHTML = myDollars;
   document.querySelector("#btnDeal").style.display = "none";
   document.getElementById("myActions").style.display = "block";
+  document.getElementById("moneyOption").style.display = "none";
 
 
 
