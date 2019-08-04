@@ -50,6 +50,7 @@ function Start() {
   shuffleDeck(cards);
   dealNew();
   document.getElementById("start").style.display = "none";
+  document.getElementById("moneyOption").style.display = "none";
   dollarValue.innerHTML = myDollars;
 }
 
@@ -77,6 +78,7 @@ function dealNew() {
   dollarValue.innerHTML = myDollars;
   document.querySelector("#btnDeal").style.display = "none";
   document.getElementById("myActions").style.display = "block";
+
 
 
   message.innerHTML =
@@ -239,6 +241,7 @@ function playEnd() {
   dollarValue.innerHTML = myDollars;
   document.getElementById("mybet").disabled = false;
   document.getElementById("maxBet").disabled = false;
+  document.getElementById("moneyOption").style.display = "block";
 }
 
 function checkTotal(arr) {
