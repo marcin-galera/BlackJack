@@ -16,7 +16,7 @@ let suits = ["spades", "clubs", "hearts", "diams"];
 let message = document.getElementById("message");
 let dollarValue = document.getElementById("pln");
 document.getElementById("btnRestart").style.display = "none";
-let numb = ["A", "A", "A", "A", "A", "A", "A", "8", "9", "10", "J", "Q", "K"];
+let numb = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
 document.getElementById("mybet").onchange = function() {
   if (this.value < 0) {
@@ -75,9 +75,7 @@ function dealNew() {
   let betValue = document.getElementById("mybet").value;
   myDollars = myDollars - betValue;
   dollarValue.innerHTML = myDollars;
-
-  /////////////////////////////
-  document.querySelector("#btnDeal").style.display = "block";
+  document.querySelector("#btnDeal").style.display = "none";
   document.getElementById("myActions").style.display = "block";
 
 
