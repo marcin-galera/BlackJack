@@ -194,7 +194,6 @@ function playEnd() {
   document.querySelector("#btnDeal").style.display = "block";
   document.querySelector("#mybet").style.display = false;
   document.querySelector("#maxBet").style.display = false;
-  message.innerHTML = "Przegrałeś!";
   let payoutJack = 1;
 
   let dealerValue = checkTotal(dealerCard);
@@ -221,19 +220,19 @@ function playEnd() {
     (dealerValue > 21 && playerValue < 22)
   ) {
     message.innerHTML +=
-      '<span style="color:green;">Wygrałeś! ' + betValue * 2 + " pln</span>";
+      '<div style="color:green;">Wygrałeś! ' + betValue * 2 + " pln</div>";
     myDollars = myDollars + betValue * 2 ;
   } else if (playerValue > 21) {
     message.innerHTML +=
-      '<span style="color:red;">Przegrałeś! ' + betValue + " pln</span>";
+      '<div style="color:red;">Przegrałeś! ' + betValue + " pln</div>";
     myDollars = myDollars - betValue;
   } else if (playerValue === dealerValue) {
     message.innerHTML +=
-      '<span style="color:blue;">Remis! ' + betValue + " pln</span>";
+      '<div style="color:blue;">Remis! ' + betValue + " pln</div>";
     myDollars = myDollars + betValue;
   } else {
     message.innerHTML +=
-      '<span style="color:red;">Przegrałeś! ' + betValue + " pln</span>";
+      '<div style="color:red;">Przegrałeś! ' + betValue + " pln</div>";
   }
 
   pValue.innerHTML = playerValue;
