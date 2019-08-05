@@ -25,7 +25,7 @@ document.getElementById("mybet").onchange = function() {
   if (this.value > myDollars) {
     this.value = myDollars;
   }
-  message.innerHTML = "Zakład o " + this.value + " pln";
+  message.innerHTML = "Zacząłeś od nowa";
 };
 
 suits.forEach(s => {
@@ -56,15 +56,19 @@ function Start() {
 
 function restartGame() {
   if (myDollars < 0) {
-    document.getElementById("btnRestart").style.display = "block";
+    document.getElementById("btnRestart").style.display = "none";
     document.getElementById("btnDeal").style.display = "none";
-    document.getElementById("myActions").style.display = "none";
-    message.innerHTML =
-      "<span  style=color:red;font-size:50px>Przegrałeś!  Zacznij od nowa!</span>";
+    document.getElementById("myActions").style.display = "block";
+    document.getElementById("moneyOption").style.display = "block";
+    
+
     myDollars = 100;
     dollarValue.innerHTML = 100;
     document.getElementById("mybet").value = 5;
-  } }
+    message.innerHTML = "Zacząłeś nową grę";
+    Start()
+  } 
+}
 
 function dealNew() {
   cards = cards;
@@ -86,10 +90,17 @@ function dealNew() {
     "Get up to 21 and bet the dealer<br>Aktualny zakład o " + betValue + " pln";
   document.getElementById("mybet").disabled = true;
   document.getElementById("maxBet").disabled = true;
+
+  if (myDollars < 0) {
+    document.getElementById("btnRestart").style.display = "block";
+    document.getElementById("myActions").style.display = "none";
+    message.innerHTML =
+    "<span  style=color:red;font-size:50px>Przegrałeś!  Zacznij od nowa!</span>";
+  }
   deal();
 
 
-  restartGame();
+
 }
 
 function reDeal() {
@@ -243,6 +254,12 @@ function playEnd() {
   document.getElementById("mybet").disabled = false;
   document.getElementById("maxBet").disabled = false;
   document.getElementById("moneyOption").style.display = "block";
+
+  if(myDollars < 0 ) {
+  document.querySelector("#myActions").style.display = "none"
+  document.querySelector("#btnDeal").style.display = "none"
+  document.getElementById("btnRestart").style.display = "block";
+  }
 }
 
 function checkTotal(arr) {
