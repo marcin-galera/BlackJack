@@ -60,14 +60,13 @@ function restartGame() {
     document.getElementById("btnDeal").style.display = "none";
     document.getElementById("myActions").style.display = "block";
     document.getElementById("moneyOption").style.display = "block";
-    
 
     myDollars = 100;
     dollarValue.innerHTML = 100;
     document.getElementById("mybet").value = 5;
     message.innerHTML = "Zacząłeś nową grę";
-    Start()
-  } 
+    Start();
+  }
 }
 
 function dealNew() {
@@ -84,8 +83,6 @@ function dealNew() {
   document.getElementById("myActions").style.display = "block";
   document.getElementById("moneyOption").style.display = "none";
 
-
-
   message.innerHTML =
     "Get up to 21 and bet the dealer<br>Aktualny zakład o " + betValue + " pln";
   document.getElementById("mybet").disabled = true;
@@ -95,12 +92,9 @@ function dealNew() {
     document.getElementById("btnRestart").style.display = "block";
     document.getElementById("myActions").style.display = "none";
     message.innerHTML =
-    "<span  style=color:red;font-size:50px>Przegrałeś!  Zacznij od nowa!</span>";
+      "<span  style=color:red;font-size:50px>Przegrałeś!  Zacznij od nowa!</span>";
   }
   deal();
-
-
-
 }
 
 function reDeal() {
@@ -126,12 +120,12 @@ function deal() {
     playerHolder.innerHTML += cardOutput(cardCount, x);
     reDeal();
   }
-  let playerValue = checkTotal(playerCard)
+  let playerValue = checkTotal(playerCard);
   if (playerValue === 21 && playerCard.length === 2) {
     message.innerHTML = "Black Jack !!";
     playEnd();
-    document.querySelector("#myActions").style.display = "none"
-    document.querySelector("#btnDeal").style.display = "block"
+    document.querySelector("#myActions").style.display = "none";
+    document.querySelector("#btnDeal").style.display = "block";
   }
 
   pValue.innerHTML = checkTotal(playerCard);
@@ -235,7 +229,7 @@ function playEnd() {
   ) {
     message.innerHTML +=
       '<div style="color:green;">Wygrałeś! ' + betValue * 2 + " pln</div>";
-    myDollars = myDollars + betValue * 2 ;
+    myDollars = myDollars + betValue * 2;
   } else if (playerValue > 21) {
     message.innerHTML +=
       '<div style="color:red;">Przegrałeś! ' + betValue + " pln</div>";
@@ -255,10 +249,10 @@ function playEnd() {
   document.getElementById("maxBet").disabled = false;
   document.getElementById("moneyOption").style.display = "block";
 
-  if(myDollars < 0 ) {
-  document.querySelector("#myActions").style.display = "none"
-  document.querySelector("#btnDeal").style.display = "none"
-  document.getElementById("btnRestart").style.display = "block";
+  if (myDollars < 0) {
+    document.querySelector("#myActions").style.display = "none";
+    document.querySelector("#btnDeal").style.display = "none";
+    document.getElementById("btnRestart").style.display = "block";
   }
 }
 
